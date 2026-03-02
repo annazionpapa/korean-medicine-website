@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 export default function Footer() {
@@ -43,18 +45,25 @@ export default function Footer() {
               진료 안내
             </h4>
             <ul className="space-y-3">
-              {["통증 클리닉", "교통사고 클리닉", "내과 클리닉", "여성 클리닉", "다이어트 클리닉", "피부 클리닉"].map(
-                (item) => (
-                  <li key={item}>
-                    <Link
-                      href="/programs"
-                      className="text-sm text-cream-dark/50 hover:text-forest transition-colors"
-                    >
-                      {item}
-                    </Link>
-                  </li>
-                )
-              )}
+              {[
+                { label: "통증 클리닉", href: "/programs" },
+                { label: "교통사고 클리닉", href: "/programs" },
+                { label: "내과 클리닉", href: "/programs" },
+                { label: "여성 클리닉", href: "/programs" },
+                { label: "다이어트 클리닉", href: "/programs" },
+                { label: "피부 클리닉", href: "/programs" },
+                { label: "비급여 수가표", href: "/pricing" },
+                { label: "사상체질 자가진단", href: "/constitution-test" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-cream-dark/50 hover:text-forest transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -68,6 +77,9 @@ export default function Footer() {
                 { label: "한의원 소개", href: "/about" },
                 { label: "의료진 소개", href: "/doctors" },
                 { label: "치료 후기", href: "/reviews" },
+                { label: "건강 칼럼", href: "/health-info" },
+                { label: "공지사항", href: "/notice" },
+                { label: "자주 묻는 질문", href: "/faq" },
                 { label: "오시는 길", href: "/contact" },
                 { label: "상담 예약", href: "/contact" },
               ].map((item) => (

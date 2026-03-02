@@ -11,6 +11,8 @@ import { programs } from "@/data/programs";
 import { doctors, stats } from "@/data/doctors";
 import { reviews } from "@/data/reviews";
 import { treatmentProcess } from "@/data/programs";
+import { notices } from "@/data/notices";
+import { healthArticles } from "@/data/health-info";
 
 /* ════════════════════════════════════
    수한의원 메인 페이지
@@ -23,11 +25,13 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
+        <NoticeBanner />
         <StatsBar />
         <PhilosophySection />
         <ProgramsSection />
         <ProcessSection />
         <DoctorsSection />
+        <HealthInfoSection />
         <ReviewsSection />
         <CTASection />
       </main>
@@ -473,6 +477,126 @@ function ReviewsSection() {
             className="inline-flex items-center text-forest text-sm font-medium"
           >
             전체 후기 보기
+            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Notice Banner ── */
+function NoticeBanner() {
+  const latestNotice = notices[0];
+  if (!latestNotice) return null;
+
+  return (
+    <section className="bg-forest/[0.04] border-b border-forest/10">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <Link
+          href={`/notice/${latestNotice.id}`}
+          className="flex items-center justify-between py-3.5 group"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <span
+              className={`flex-shrink-0 px-2 py-0.5 text-[11px] rounded-full font-bold ${
+                latestNotice.type === "event"
+                  ? "bg-gold/20 text-gold-dark"
+                  : "bg-forest/10 text-forest"
+              }`}
+            >
+              {latestNotice.type === "event" ? "이벤트" : "공지"}
+            </span>
+            <span className="text-sm text-ink truncate group-hover:text-forest transition-colors">
+              {latestNotice.title}
+            </span>
+            {latestNotice.isNew && (
+              <span className="flex-shrink-0 px-1.5 py-0.5 bg-red-100 text-red-600 text-[10px] rounded-full font-bold hidden sm:inline">
+                NEW
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-2 flex-shrink-0 ml-4">
+            <span className="text-xs text-ink-faint hidden sm:inline">전체보기</span>
+            <svg className="w-4 h-4 text-ink-faint group-hover:text-forest transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+/* ── Health Info Section ── */
+function HealthInfoSection() {
+  const latestArticles = healthArticles.slice(0, 3);
+
+  return (
+    <section className="py-20 lg:py-32 bg-sand-light">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <ScrollReveal>
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <span className="text-sm text-forest font-medium tracking-widest uppercase">
+                Health Info
+              </span>
+              <h2 className="mt-4 text-3xl lg:text-4xl font-serif font-semibold text-ink">
+                건강 칼럼
+              </h2>
+            </div>
+            <Link
+              href="/health-info"
+              className="hidden sm:flex items-center text-forest text-sm font-medium group"
+            >
+              전체 보기
+              <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {latestArticles.map((article, i) => (
+            <ScrollReveal key={article.slug} delay={Math.min(i + 1, 3)}>
+              <Link
+                href={`/health-info/${article.slug}`}
+                className="card-natural block group h-full"
+              >
+                <div className="p-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2.5 py-1 bg-forest/5 text-forest text-xs rounded-full font-medium">
+                      {article.category}
+                    </span>
+                    <span className="text-xs text-ink-faint">{article.date}</span>
+                  </div>
+                  <h3 className="text-base font-semibold text-ink group-hover:text-forest transition-colors leading-snug line-clamp-2">
+                    {article.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-ink-muted leading-relaxed line-clamp-2">
+                    {article.summary}
+                  </p>
+                  <div className="mt-4 flex items-center text-forest text-sm font-medium">
+                    읽어보기
+                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+            </ScrollReveal>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center sm:hidden">
+          <Link
+            href="/health-info"
+            className="inline-flex items-center text-forest text-sm font-medium"
+          >
+            전체 보기
             <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

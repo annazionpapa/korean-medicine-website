@@ -7,6 +7,8 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Image from "next/image";
 import Link from "next/link";
 import { programs, treatmentProcess } from "@/data/programs";
+import { getFaqsByProgram } from "@/data/faq";
+import Accordion from "@/components/Accordion";
 
 export default function ProgramsPage() {
   return (
@@ -103,6 +105,28 @@ export default function ProgramsPage() {
                     </Link>
                   </div>
                 </div>
+
+                {/* 관련 FAQ */}
+                {(() => {
+                  const programFaqs = getFaqsByProgram(program.id);
+                  if (programFaqs.length === 0) return null;
+                  return (
+                    <div className="mt-10 bg-forest/[0.03] rounded-2xl p-6">
+                      <h3 className="text-sm font-semibold text-forest mb-4 flex items-center gap-2">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {program.title} 관련 자주 묻는 질문
+                      </h3>
+                      <Accordion
+                        items={programFaqs.map((f) => ({
+                          title: f.question,
+                          content: f.answer,
+                        }))}
+                      />
+                    </div>
+                  );
+                })()}
 
                 {idx < programs.length - 1 && (
                   <div className="divider-natural mt-16" />

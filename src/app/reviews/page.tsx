@@ -4,10 +4,31 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomCTA from "@/components/MobileBottomCTA";
 import ScrollReveal from "@/components/ScrollReveal";
+import CategoryTabs from "@/components/CategoryTabs";
 import Link from "next/link";
 import { reviews } from "@/data/reviews";
+import { useState, useMemo } from "react";
+
+const reviewCategories = ["전체", "통증", "교통사고", "여성건강", "다이어트", "피부", "내과", "기타"];
+
+function getReviewCategory(treatment: string): string {
+  if (["허리 통증", "목 디스크", "어깨 통증", "무릎 관절통", "손목 터널 증후군", "허리 디스크", "퇴행성 관절염", "허리 협착증", "스포츠 부상", "어깨 회전근개", "두통·편두통"].includes(treatment)) return "통증";
+  if (["교통사고 후유증"].includes(treatment)) return "교통사고";
+  if (["갱년기 증상", "생리통·생리불순", "산후 관리", "난임 치료", "갱년기·불면", "생리통", "냉증·수족냉증"].includes(treatment)) return "여성건강";
+  if (["다이어트 한약", "산후 비만"].includes(treatment)) return "다이어트";
+  if (["아토피 피부염", "여드름 피부", "스트레스성 탈모"].includes(treatment)) return "피부";
+  if (["만성 비염", "소화불량", "역류성 식도염", "만성 피로", "불면증"].includes(treatment)) return "내과";
+  return "기타";
+}
 
 export default function ReviewsPage() {
+  const [activeCategory, setActiveCategory] = useState("전체");
+
+  const filteredReviews = useMemo(() => {
+    if (activeCategory === "전체") return reviews;
+    return reviews.filter((r) => getReviewCategory(r.treatment) === activeCategory);
+  }, [activeCategory]);
+
   return (
     <>
       <Header />
@@ -52,8 +73,22 @@ export default function ReviewsPage() {
         {/* Reviews Grid */}
         <section className="py-20 lg:py-28 bg-cream">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            {/* Category Filter */}
+            <div className="mb-10">
+              <CategoryTabs
+                categories={reviewCategories}
+                active={activeCategory}
+                onChange={setActiveCategory}
+              />
+            </div>
+
+            {/* Results count */}
+            <p className="text-sm text-ink-faint mb-6">
+              {filteredReviews.length}개의 후기
+            </p>
+
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {reviews.map((review, i) => (
+              {filteredReviews.map((review, i) => (
                 <ScrollReveal key={review.id} delay={Math.min((i % 3) + 1, 3)}>
                   <div className="card-natural p-6 h-full flex flex-col">
                     {/* Stars */}
@@ -92,6 +127,13 @@ export default function ReviewsPage() {
                 </ScrollReveal>
               ))}
             </div>
+
+            {/* Empty state */}
+            {filteredReviews.length === 0 && (
+              <div className="text-center py-16">
+                <p className="text-ink-muted">해당 카테고리의 후기가 아직 없습니다.</p>
+              </div>
+            )}
 
             {/* Notice */}
             <ScrollReveal>

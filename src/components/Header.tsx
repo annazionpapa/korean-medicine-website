@@ -1,19 +1,44 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
-const navItems = [
+interface NavItem {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+}
+
+const navItems: NavItem[] = [
   { label: "한의원 소개", href: "/about" },
-  { label: "진료 안내", href: "/programs" },
+  {
+    label: "진료 안내",
+    href: "/programs",
+    children: [
+      { label: "진료 프로그램", href: "/programs" },
+      { label: "비급여 수가표", href: "/pricing" },
+    ],
+  },
   { label: "의료진", href: "/doctors" },
   { label: "치료 후기", href: "/reviews" },
+  {
+    label: "건강정보",
+    href: "/health-info",
+    children: [
+      { label: "건강 칼럼", href: "/health-info" },
+      { label: "공지사항", href: "/notice" },
+      { label: "자주 묻는 질문", href: "/faq" },
+    ],
+  },
   { label: "오시는 길", href: "/contact" },
 ];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileSubOpen, setMobileSubOpen] = useState<string | null>(null);
+  const dropdownTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -25,6 +50,15 @@ export default function Header() {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
+
+  const handleMouseEnter = (label: string) => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setOpenDropdown(label);
+  };
+
+  const handleMouseLeave = () => {
+    dropdownTimeout.current = setTimeout(() => setOpenDropdown(null), 150);
+  };
 
   return (
     <>
@@ -55,16 +89,50 @@ export default function Header() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-7">
               {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-[15px] text-ink-light hover:text-forest transition-colors duration-300 relative group"
+                <div
+                  key={item.label}
+                  className="relative"
+                  onMouseEnter={() => item.children && handleMouseEnter(item.label)}
+                  onMouseLeave={() => item.children && handleMouseLeave()}
                 >
-                  {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-forest transition-all duration-300 group-hover:w-full" />
-                </Link>
+                  <Link
+                    href={item.href}
+                    className="text-[15px] text-ink-light hover:text-forest transition-colors duration-300 relative group flex items-center gap-1"
+                  >
+                    {item.label}
+                    {item.children && (
+                      <svg className="w-3.5 h-3.5 text-ink-faint group-hover:text-forest transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    )}
+                    <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-forest transition-all duration-300 group-hover:w-full" />
+                  </Link>
+
+                  {/* Desktop Dropdown */}
+                  {item.children && (
+                    <div
+                      className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200 ${
+                        openDropdown === item.label
+                          ? "opacity-100 pointer-events-auto translate-y-0"
+                          : "opacity-0 pointer-events-none -translate-y-1"
+                      }`}
+                    >
+                      <div className="bg-white rounded-xl shadow-lg border border-sand-dark overflow-hidden min-w-[180px]">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className="block px-5 py-3 text-sm text-ink-light hover:text-forest hover:bg-forest/[0.03] transition-colors"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
             </nav>
 
@@ -120,22 +188,73 @@ export default function Header() {
             : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex flex-col items-center justify-center h-full gap-8">
+        <div className="flex flex-col items-center justify-center h-full gap-6 px-8">
           {navItems.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-              className="text-2xl font-serif text-ink hover:text-forest transition-colors"
-              style={{
-                transitionDelay: mobileOpen ? `${i * 80}ms` : "0ms",
-                opacity: mobileOpen ? 1 : 0,
-                transform: mobileOpen ? "translateY(0)" : "translateY(20px)",
-                transition: "all 0.4s ease",
-              }}
-            >
-              {item.label}
-            </Link>
+            <div key={item.label} className="text-center w-full max-w-xs">
+              {item.children ? (
+                <div
+                  style={{
+                    transitionDelay: mobileOpen ? `${i * 80}ms` : "0ms",
+                    opacity: mobileOpen ? 1 : 0,
+                    transform: mobileOpen ? "translateY(0)" : "translateY(20px)",
+                    transition: "all 0.4s ease",
+                  }}
+                >
+                  <button
+                    onClick={() =>
+                      setMobileSubOpen(
+                        mobileSubOpen === item.label ? null : item.label
+                      )
+                    }
+                    className="text-2xl font-serif text-ink hover:text-forest transition-colors flex items-center justify-center gap-2 w-full"
+                  >
+                    {item.label}
+                    <svg
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileSubOpen === item.label ? "rotate-180" : ""
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ${
+                      mobileSubOpen === item.label ? "max-h-40 mt-2" : "max-h-0"
+                    }`}
+                  >
+                    <div className="flex flex-col gap-2">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          onClick={() => setMobileOpen(false)}
+                          className="text-base text-ink-muted hover:text-forest transition-colors"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-2xl font-serif text-ink hover:text-forest transition-colors"
+                  style={{
+                    transitionDelay: mobileOpen ? `${i * 80}ms` : "0ms",
+                    opacity: mobileOpen ? 1 : 0,
+                    transform: mobileOpen ? "translateY(0)" : "translateY(20px)",
+                    transition: "all 0.4s ease",
+                  }}
+                >
+                  {item.label}
+                </Link>
+              )}
+            </div>
           ))}
           <div
             className="mt-4 flex flex-col items-center gap-4"
