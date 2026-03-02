@@ -43,7 +43,7 @@ export default function FAQPage() {
 
         {/* FAQ Content */}
         <section className="py-20 lg:py-28 bg-cream">
-          <div className="mx-auto max-w-3xl px-5 lg:px-8">
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
             {/* Category Tabs */}
             <div className="mb-10">
               <CategoryTabs
@@ -52,6 +52,11 @@ export default function FAQPage() {
                 onChange={setActiveCategory}
               />
             </div>
+
+            {/* FAQ Count */}
+            <p className="text-sm text-ink-faint mb-6">
+              총 <span className="text-forest font-semibold">{filteredFaqs.length}</span>개의 질문
+            </p>
 
             {/* FAQ Items */}
             <Accordion
@@ -71,20 +76,23 @@ export default function FAQPage() {
 
             {/* Contact notice */}
             <ScrollReveal>
-              <div className="mt-12 bg-sand-light rounded-2xl border border-sand-dark p-6 text-center">
-                <p className="text-sm text-ink-muted">
+              <div className="mt-12 bg-sand-light rounded-2xl border border-sand-dark p-8 text-center">
+                <p className="text-ink-muted">
                   원하시는 답변을 찾지 못하셨나요?
                 </p>
-                <div className="mt-4 flex flex-wrap justify-center gap-3">
+                <p className="text-sm text-ink-faint mt-1">
+                  전화 문의 또는 온라인 상담으로 궁금한 점을 해결해 드리겠습니다.
+                </p>
+                <div className="mt-5 flex flex-wrap justify-center gap-3">
                   <a
                     href="tel:02-1234-5678"
-                    className="px-5 py-2.5 bg-forest text-white rounded-full text-sm font-medium hover:bg-forest-dark transition-colors"
+                    className="px-6 py-2.5 bg-forest text-white rounded-full text-sm font-medium hover:bg-forest-dark transition-colors"
                   >
-                    전화 문의
+                    전화 문의 02-1234-5678
                   </a>
                   <Link
                     href="/contact"
-                    className="px-5 py-2.5 border border-ink/15 text-ink rounded-full text-sm font-medium hover:border-forest hover:text-forest transition-colors"
+                    className="px-6 py-2.5 border border-ink/15 text-ink rounded-full text-sm font-medium hover:border-forest hover:text-forest transition-colors"
                   >
                     온라인 상담
                   </Link>

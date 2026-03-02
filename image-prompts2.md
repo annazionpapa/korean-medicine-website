@@ -1,6 +1,6 @@
 # 한의원 홈페이지 추가 이미지 프롬프트 (중급 업그레이드용)
 
-## 건강정보 칼럼 썸네일 (7장)
+## 건강정보 칼럼 썸네일 (7장) ✅ 완료
 
 ### 1. health-disc.jpg - 디스크 예방 칼럼
 ```
@@ -39,9 +39,22 @@ Atmospheric photography of a peaceful bedroom scene at twilight. A cup of herbal
 
 ---
 
+## 대표원장 활동 사진 교체 (1장)
+
+> 기존 doctor-kim-action.jpg (환자 등을 만지는 장면) 제거 → 아래 이미지로 교체
+> doctor-kim-action2.jpg (침 놓는 장면)은 유지
+> **Same as reference 사용** (기존 doctor-kim-action2.jpg의 원장 얼굴 참조)
+
+### 8. doctor-kim-action.jpg (교체) - 대표원장 환자 상담 장면
+```
+Same person as reference image. Professional medical photography of a Korean medicine doctor in a white coat having a consultation with a patient in a warm, modern Korean medicine clinic. The doctor is sitting at a desk, gesturing while explaining a treatment plan. Shot from behind the patient's right shoulder, showing only the back of the patient's head and one shoulder in soft focus foreground. The doctor's face is clearly visible, making eye contact and smiling warmly. Clean clinic interior with warm natural lighting, wooden accents, and subtle Korean medicine elements (herbal cabinet in soft bokeh background). Professional medical editorial style. 1376x768, 72dpi, warm natural tones.
+```
+
+---
+
 ## 참고사항
 - 모든 이미지는 1376x768px (16:9 비율) 권장
 - 한의원 Natural Grain 컨셉에 맞는 따뜻하고 자연스러운 톤
 - 기존 이미지와 동일한 스타일 유지 (포레스트그린 + 크림 + 골드 톤)
-- 건강정보 칼럼 페이지에서 썸네일로 사용 (현재는 placeholder 아이콘 표시)
-- 이미지 생성 후 `/public/images/` 폴더에 저장
+- 건강정보 칼럼 썸네일: `/public/images/` 폴더에 저장 ✅ 완료
+- 대표원장 활동 사진: `/public/images/doctor-kim-action.jpg` 교체
