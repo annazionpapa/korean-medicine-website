@@ -92,8 +92,8 @@ export default function AboutPage() {
               </div>
             </ScrollReveal>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
+            {(() => {
+              const values = [
                 {
                   icon: "🌿",
                   title: "자연치유",
@@ -114,16 +114,41 @@ export default function AboutPage() {
                   title: "끊임없는 연구",
                   desc: "한의학의 전통을 지키면서도 최신 연구와 기술을 접목합니다.",
                 },
-              ].map((value, i) => (
-                <ScrollReveal key={value.title} delay={i + 1}>
-                  <div className="bg-white rounded-2xl p-7 text-center h-full border border-sand-dark">
-                    <span className="text-4xl">{value.icon}</span>
-                    <h3 className="mt-4 text-lg font-semibold text-ink">{value.title}</h3>
-                    <p className="mt-3 text-sm text-ink-muted leading-relaxed">{value.desc}</p>
+              ];
+              return (
+                <>
+                  {/* Desktop/Tablet: 기존 그리드 */}
+                  <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {values.map((value, i) => (
+                      <ScrollReveal key={value.title} delay={i + 1}>
+                        <div className="bg-white rounded-2xl p-7 text-center h-full border border-sand-dark">
+                          <span className="text-4xl">{value.icon}</span>
+                          <h3 className="mt-4 text-lg font-semibold text-ink">{value.title}</h3>
+                          <p className="mt-3 text-sm text-ink-muted leading-relaxed">{value.desc}</p>
+                        </div>
+                      </ScrollReveal>
+                    ))}
                   </div>
-                </ScrollReveal>
-              ))}
-            </div>
+
+                  {/* Mobile: 가로 카드 */}
+                  <div className="sm:hidden space-y-3">
+                    {values.map((value, i) => (
+                      <ScrollReveal key={value.title} delay={Math.min(i + 1, 3)}>
+                        <div className="bg-white rounded-xl p-5 border border-sand-dark flex items-start gap-4">
+                          <div className="w-12 h-12 rounded-full bg-forest/10 flex items-center justify-center flex-shrink-0">
+                            <span className="text-2xl">{value.icon}</span>
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-base font-semibold text-ink">{value.title}</h3>
+                            <p className="mt-1 text-sm text-ink-muted leading-relaxed">{value.desc}</p>
+                          </div>
+                        </div>
+                      </ScrollReveal>
+                    ))}
+                  </div>
+                </>
+              );
+            })()}
           </div>
         </section>
 
