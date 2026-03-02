@@ -44,6 +44,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -53,6 +55,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 ::selection {
@@ -174,6 +178,16 @@ body {
 }
 .scroll-horizontal::-webkit-scrollbar {
   display: none;
+}
+
+/* ── Mobile: 작은 글자 크기 보정 ── */
+@media (max-width: 767px) {
+  /* text-xs (12px → 13px), text-[10px]/[11px] → 12px */
+  .text-xs { font-size: 0.8125rem !important; }
+  .text-\[10px\] { font-size: 0.75rem !important; }
+  .text-\[11px\] { font-size: 0.75rem !important; }
+  /* text-sm (14px → 15px) */
+  .text-sm { font-size: 0.9375rem !important; }
 }
 
 /* ── Mobile Bottom CTA Space ── */
