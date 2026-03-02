@@ -45,7 +45,7 @@ export const programs: Program[] = [
     title: "내과 클리닉",
     titleEn: "Internal Medicine",
     icon: "🫁",
-    image: "/images/program-internal.jpg",
+    image: "/images/doctor-park-action.jpg",
     description: "소화기, 호흡기, 순환기 질환을 한방 내과 전문 치료로 체질부터 개선합니다.",
     details: [
       "사상체질 진단을 통한 맞춤 치료",

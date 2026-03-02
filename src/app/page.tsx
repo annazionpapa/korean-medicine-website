@@ -432,7 +432,7 @@ function ReviewsSection() {
         </ScrollReveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {reviews.slice(0, 6).map((review, i) => (
+          {reviews.slice(0, 18).map((review, i) => (
             <ScrollReveal key={review.id} delay={Math.min(i + 1, 6)}>
               <div className="card-natural p-6 h-full flex flex-col">
                 {/* Stars */}
