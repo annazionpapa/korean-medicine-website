@@ -27,13 +27,13 @@ export default function Home() {
         <HeroSection />
         <NoticeBanner />
         <StatsBar />
-        <PhilosophySection />
         <ProgramsSection />
-        <ProcessSection />
         <DoctorsSection />
-        <HealthInfoSection />
+        <ProcessSection />
         <ReviewsSection />
         <CTASection />
+        <PhilosophySection />
+        <HealthInfoSection />
       </main>
       <Footer />
       <MobileBottomCTA />
