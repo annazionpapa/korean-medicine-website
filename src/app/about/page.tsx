@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import MobileBottomCTA from "@/components/MobileBottomCTA";
 import ScrollReveal from "@/components/ScrollReveal";
 import CountUp from "@/components/CountUp";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function AboutPage() {
@@ -37,11 +38,14 @@ export default function AboutPage() {
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <ScrollReveal direction="left">
-                <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-forest/10 to-sand overflow-hidden relative">
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                    <span className="text-6xl mb-4">🏥</span>
-                    <p className="font-serif text-ink-light">한의원 외관 사진</p>
-                  </div>
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                  <Image
+                    src="/images/clinic-exterior.jpg"
+                    alt="수한의원 외관 - 30년 전통의 한의원 건물"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </div>
               </ScrollReveal>
 
@@ -160,19 +164,26 @@ export default function AboutPage() {
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {[
-                { title: "대기실", desc: "따뜻한 원목 인테리어의 편안한 대기 공간", emoji: "🛋️" },
-                { title: "진료실", desc: "프라이버시가 보장되는 독립 진료실", emoji: "🩺" },
-                { title: "침 치료실", desc: "청결한 개인별 침상으로 쾌적한 치료 환경", emoji: "📍" },
-                { title: "추나 치료실", desc: "전문 추나 치료를 위한 최적의 시설", emoji: "💆" },
-                { title: "한약 조제실", desc: "엄선된 약재로 정성껏 조제하는 공간", emoji: "🫖" },
-                { title: "상담실", desc: "편안한 분위기에서 진행되는 1:1 상담", emoji: "💬" },
+                { title: "대기실", desc: "따뜻한 원목 인테리어의 편안한 대기 공간", image: "/images/facility-waiting.jpg" },
+                { title: "진료실", desc: "프라이버시가 보장되는 독립 진료실", image: "/images/facility-consultation.jpg" },
+                { title: "침 치료실", desc: "청결한 개인별 침상으로 쾌적한 치료 환경", image: "/images/facility-acupuncture.jpg" },
+                { title: "추나 치료실", desc: "전문 추나 치료를 위한 최적의 시설", image: "/images/facility-chuna.jpg" },
+                { title: "한약 조제실", desc: "엄선된 약재로 정성껏 조제하는 공간", image: "/images/facility-pharmacy.jpg" },
+                { title: "상담실", desc: "편안한 분위기에서 진행되는 1:1 상담", image: "/images/facility-counseling.jpg" },
               ].map((facility, i) => (
                 <ScrollReveal key={facility.title} delay={Math.min(i + 1, 6)}>
-                  <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-sand to-cream-warm overflow-hidden relative group">
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                      <span className="text-4xl mb-3">{facility.emoji}</span>
-                      <h3 className="text-base font-semibold text-ink">{facility.title}</h3>
-                      <p className="text-sm text-ink-muted mt-1">{facility.desc}</p>
+                  <div className="aspect-[4/3] rounded-2xl overflow-hidden relative group">
+                    <Image
+                      src={facility.image}
+                      alt={`${facility.title} - ${facility.desc}`}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <h3 className="text-base font-semibold text-white">{facility.title}</h3>
+                      <p className="text-sm text-white/80 mt-0.5">{facility.desc}</p>
                     </div>
                   </div>
                 </ScrollReveal>

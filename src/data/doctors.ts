@@ -5,6 +5,7 @@ export interface Doctor {
   title: string;
   specialty: string;
   image: string;
+  actionImages: { src: string; alt: string }[];
   education: string[];
   career: string[];
   certifications: string[];
@@ -18,7 +19,11 @@ export const doctors: Doctor[] = [
     nameEn: "Suhyeon Kim",
     title: "대표원장",
     specialty: "통증·추나 전문",
-    image: "/images/doctor-1.jpg",
+    image: "/images/doctor-kim-full.jpg",
+    actionImages: [
+      { src: "/images/doctor-kim-action.jpg", alt: "추나요법 시술 중인 김수현 대표원장" },
+      { src: "/images/doctor-kim-action2.jpg", alt: "침 시술 중인 김수현 대표원장" },
+    ],
     education: [
       "경희대학교 한의과대학 졸업",
       "경희대학교 대학원 한방재활의학 석사",
@@ -44,7 +49,11 @@ export const doctors: Doctor[] = [
     nameEn: "Jiyeon Park",
     title: "원장",
     specialty: "여성·내과 전문",
-    image: "/images/doctor-2.jpg",
+    image: "/images/doctor-park-full.jpg",
+    actionImages: [
+      { src: "/images/doctor-park-action.jpg", alt: "맥진 중인 박지연 원장" },
+      { src: "/images/doctor-park-action2.jpg", alt: "한약재 검수 중인 박지연 원장" },
+    ],
     education: [
       "원광대학교 한의과대학 졸업",
       "원광대학교 대학원 한방부인과학 석사",

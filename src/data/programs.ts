@@ -3,6 +3,7 @@ export interface Program {
   title: string;
   titleEn: string;
   icon: string;
+  image: string;
   description: string;
   details: string[];
   symptoms: string[];
@@ -14,6 +15,7 @@ export const programs: Program[] = [
     title: "통증 클리닉",
     titleEn: "Pain Clinic",
     icon: "🦴",
+    image: "/images/program-pain.jpg",
     description: "허리, 목, 어깨, 무릎 등 근골격계 통증을 한방 치료로 근본적으로 개선합니다.",
     details: [
       "침·전침 치료로 통증 부위 직접 자극",
@@ -28,6 +30,7 @@ export const programs: Program[] = [
     title: "교통사고 클리닉",
     titleEn: "Traffic Accident",
     icon: "🚗",
+    image: "/images/program-accident.jpg",
     description: "교통사고 후유증을 한방 통합 치료로 빠르게 회복합니다. 자동차보험 적용.",
     details: [
       "사고 직후 응급 한방 치료 가능",
@@ -42,6 +45,7 @@ export const programs: Program[] = [
     title: "내과 클리닉",
     titleEn: "Internal Medicine",
     icon: "🫁",
+    image: "/images/program-internal.jpg",
     description: "소화기, 호흡기, 순환기 질환을 한방 내과 전문 치료로 체질부터 개선합니다.",
     details: [
       "사상체질 진단을 통한 맞춤 치료",
@@ -56,6 +60,7 @@ export const programs: Program[] = [
     title: "여성 클리닉",
     titleEn: "Women's Health",
     icon: "🌸",
+    image: "/images/program-women.jpg",
     description: "생리통, 갱년기, 산후조리 등 여성 특유의 건강 문제를 섬세하게 치료합니다.",
     details: [
       "생리통·생리불순 근본 치료",
@@ -70,6 +75,7 @@ export const programs: Program[] = [
     title: "다이어트 클리닉",
     titleEn: "Diet & Wellness",
     icon: "🍃",
+    image: "/images/program-diet.jpg",
     description: "체질 분석에 기반한 건강한 감량. 요요 없는 한방 다이어트를 경험하세요.",
     details: [
       "사상체질별 맞춤 다이어트 한약",
@@ -84,6 +90,7 @@ export const programs: Program[] = [
     title: "피부 클리닉",
     titleEn: "Dermatology",
     icon: "✨",
+    image: "/images/program-skin.jpg",
     description: "아토피, 여드름, 건선 등 피부 질환을 내부 체질 개선과 함께 치료합니다.",
     details: [
       "아토피 피부염 체질 개선 치료",

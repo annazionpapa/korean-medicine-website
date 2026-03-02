@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomCTA from "@/components/MobileBottomCTA";
 import ScrollReveal from "@/components/ScrollReveal";
+import Image from "next/image";
 import Link from "next/link";
 import { doctors } from "@/data/doctors";
 
@@ -35,14 +36,36 @@ export default function DoctorsPage() {
             {doctors.map((doctor, idx) => (
               <ScrollReveal key={doctor.id}>
                 <div className={`grid lg:grid-cols-5 gap-10 lg:gap-16 items-start`}>
-                  {/* Image */}
+                  {/* Image + Activity Gallery */}
                   <div className={`lg:col-span-2 ${idx % 2 === 1 ? "lg:order-2" : ""}`}>
-                    <div className="aspect-[3/4] rounded-2xl bg-gradient-to-br from-forest/5 to-sand overflow-hidden relative sticky top-28">
-                      <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-                        <div className="w-28 h-28 rounded-full bg-forest/10 flex items-center justify-center">
-                          <span className="text-5xl">👨‍⚕️</span>
-                        </div>
-                        <p className="text-sm text-ink-muted mt-4">프로필 사진</p>
+                    <div className="sticky top-28 space-y-3">
+                      {/* Main Profile Image */}
+                      <div className="aspect-[3/4] rounded-2xl overflow-hidden relative">
+                        <Image
+                          src={doctor.image}
+                          alt={`${doctor.name} ${doctor.title} 프로필`}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1024px) 100vw, 40vw"
+                        />
+                      </div>
+
+                      {/* Activity Images */}
+                      <div className="grid grid-cols-2 gap-3">
+                        {doctor.actionImages.map((img, j) => (
+                          <div
+                            key={j}
+                            className="aspect-[4/3] rounded-xl overflow-hidden relative"
+                          >
+                            <Image
+                              src={img.src}
+                              alt={img.alt}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 1024px) 50vw, 20vw"
+                            />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>

@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomCTA from "@/components/MobileBottomCTA";
 import ScrollReveal from "@/components/ScrollReveal";
+import Image from "next/image";
 import Link from "next/link";
 import { programs, treatmentProcess } from "@/data/programs";
 
@@ -41,14 +42,16 @@ export default function ProgramsPage() {
                     idx % 2 === 1 ? "lg:direction-rtl" : ""
                   }`}
                 >
-                  {/* Image placeholder */}
+                  {/* Image */}
                   <div className={`${idx % 2 === 1 ? "lg:order-2" : ""}`}>
-                    <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-forest/5 to-sand overflow-hidden relative">
-                      <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                        <span className="text-6xl mb-4">{program.icon}</span>
-                        <p className="font-serif text-ink-light text-lg">{program.title}</p>
-                        <p className="text-sm text-ink-muted mt-1">{program.titleEn}</p>
-                      </div>
+                    <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                      <Image
+                        src={program.image}
+                        alt={`${program.title} - ${program.titleEn}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
                     </div>
                   </div>
 

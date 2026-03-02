@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import MobileBottomCTA from "@/components/MobileBottomCTA";
 import ScrollReveal from "@/components/ScrollReveal";
 import CountUp from "@/components/CountUp";
+import Image from "next/image";
 import Link from "next/link";
 import { programs } from "@/data/programs";
 import { doctors, stats } from "@/data/doctors";
@@ -129,25 +130,15 @@ function HeroSection() {
 
           {/* Visual */}
           <div className="relative anim-fade anim-fade-d1">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-forest/10 to-herb/10">
-              {/* Placeholder for hero image */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-                <div className="w-24 h-24 rounded-full bg-forest/10 flex items-center justify-center mb-6">
-                  <span className="text-5xl">🌿</span>
-                </div>
-                <p className="text-lg font-serif text-ink-light">
-                  한의원 내부 사진
-                </p>
-                <p className="text-sm text-ink-muted mt-2">
-                  따뜻한 원목 인테리어의
-                  <br />
-                  편안한 진료 공간
-                </p>
-              </div>
-
-              {/* Decorative elements */}
-              <div className="absolute top-6 right-6 w-16 h-16 border border-forest/20 rounded-full" />
-              <div className="absolute bottom-6 left-6 w-10 h-10 border border-gold/30 rounded-full" />
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden">
+              <Image
+                src="/images/hero-interior.jpg"
+                alt="수한의원 내부 - 따뜻한 원목 인테리어의 편안한 진료 공간"
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
 
             {/* Floating card */}
@@ -211,11 +202,16 @@ function PhilosophySection() {
           {/* Image */}
           <ScrollReveal direction="left">
             <div className="relative">
-              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-herb/10 to-sand overflow-hidden">
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                  <span className="text-6xl mb-4">🫖</span>
-                  <p className="font-serif text-ink-light">한약 달이는 모습</p>
-                </div>
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                <Image
+                  src="/images/herbal-medicine.jpg"
+                  alt="전통 한약재와 약탕기 - 정성스러운 한약 조제"
+                  fill
+                  className="object-cover"
+                  priority
+                  unoptimized
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
               {/* Accent corner */}
               <div className="absolute -top-3 -right-3 w-20 h-20 border-t-2 border-r-2 border-forest/30 rounded-tr-2xl" />
@@ -398,18 +394,37 @@ function DoctorsSection() {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {doctors.map((doctor, i) => (
             <ScrollReveal key={doctor.id} delay={i + 1}>
               <div className="bg-white rounded-2xl overflow-hidden border border-sand-dark hover:shadow-lg hover:shadow-forest/5 transition-all duration-300">
-                {/* Image */}
-                <div className="aspect-[3/2] bg-gradient-to-br from-forest/5 to-sand relative overflow-hidden">
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <div className="w-20 h-20 rounded-full bg-forest/10 flex items-center justify-center">
-                      <span className="text-3xl">👨‍⚕️</span>
+                {/* Profile Image */}
+                <div className="aspect-[3/2] relative overflow-hidden">
+                  <Image
+                    src={doctor.image}
+                    alt={`${doctor.name} ${doctor.title} 프로필`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+
+                {/* Activity Images Strip */}
+                <div className="grid grid-cols-2 gap-px bg-sand-dark">
+                  {doctor.actionImages.map((img, j) => (
+                    <div
+                      key={j}
+                      className="aspect-[16/10] relative overflow-hidden"
+                    >
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                      />
                     </div>
-                    <p className="text-sm text-ink-muted mt-3">원장 프로필 사진</p>
-                  </div>
+                  ))}
                 </div>
 
                 {/* Info */}
