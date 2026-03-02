@@ -36,10 +36,9 @@ export default function DoctorsPage() {
             {doctors.map((doctor, idx) => (
               <ScrollReveal key={doctor.id}>
                 <div className={`grid lg:grid-cols-5 gap-10 lg:gap-16 items-start`}>
-                  {/* Image + Activity Gallery */}
+                  {/* Profile Image */}
                   <div className={`lg:col-span-2 ${idx % 2 === 1 ? "lg:order-2" : ""}`}>
-                    <div className="sticky top-28 space-y-3">
-                      {/* Main Profile Image */}
+                    <div className="sticky top-28">
                       <div className="aspect-[3/4] rounded-2xl overflow-hidden relative">
                         <Image
                           src={doctor.image}
@@ -48,24 +47,6 @@ export default function DoctorsPage() {
                           className="object-cover"
                           sizes="(max-width: 1024px) 100vw, 40vw"
                         />
-                      </div>
-
-                      {/* Activity Images */}
-                      <div className="grid grid-cols-2 gap-3">
-                        {doctor.actionImages.map((img, j) => (
-                          <div
-                            key={j}
-                            className="aspect-[4/3] rounded-xl overflow-hidden relative"
-                          >
-                            <Image
-                              src={img.src}
-                              alt={img.alt}
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 1024px) 50vw, 20vw"
-                            />
-                          </div>
-                        ))}
                       </div>
                     </div>
                   </div>
@@ -147,6 +128,24 @@ export default function DoctorsPage() {
                       {doctor.name} 원장 상담 예약
                     </Link>
                   </div>
+                </div>
+
+                {/* Activity Images - 전체 너비 */}
+                <div className="mt-10 grid grid-cols-2 gap-4">
+                  {doctor.actionImages.map((img, j) => (
+                    <div
+                      key={j}
+                      className="aspect-[3/2] rounded-2xl overflow-hidden relative"
+                    >
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 50vw, 50vw"
+                      />
+                    </div>
+                  ))}
                 </div>
 
                 {idx < doctors.length - 1 && (
