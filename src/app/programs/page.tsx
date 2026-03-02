@@ -150,7 +150,8 @@ export default function ProgramsPage() {
               </div>
             </ScrollReveal>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {/* Desktop: 가로 5칸 카드 */}
+            <div className="hidden lg:grid lg:grid-cols-5 gap-6">
               {treatmentProcess.map((step, i) => (
                 <ScrollReveal key={step.step} delay={Math.min(i + 1, 5)}>
                   <div className="bg-white rounded-2xl p-6 text-center border border-sand-dark h-full">
@@ -162,6 +163,31 @@ export default function ProgramsPage() {
                     </span>
                     <h3 className="mt-1 text-base font-semibold text-ink">{step.title}</h3>
                     <p className="mt-2 text-sm text-ink-muted">{step.description}</p>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+
+            {/* Mobile/Tablet: 타임라인 카드 */}
+            <div className="lg:hidden max-w-md mx-auto">
+              {treatmentProcess.map((step, i) => (
+                <ScrollReveal key={step.step} delay={Math.min(i + 1, 3)}>
+                  <div className="flex gap-4 relative">
+                    <div className="flex flex-col items-center">
+                      <div className="w-14 h-14 rounded-full bg-white border-2 border-forest/20 flex items-center justify-center flex-shrink-0 relative z-10">
+                        <span className="text-2xl">{step.icon}</span>
+                      </div>
+                      {i < treatmentProcess.length - 1 && (
+                        <div className="w-px flex-1 bg-forest/15 my-1" />
+                      )}
+                    </div>
+                    <div className={`flex-1 bg-white rounded-xl border border-sand-dark p-4 ${i < treatmentProcess.length - 1 ? "mb-4" : ""}`}>
+                      <span className="text-xs text-forest font-semibold tracking-wider">
+                        STEP {step.step}
+                      </span>
+                      <h3 className="mt-1 text-base font-semibold text-ink">{step.title}</h3>
+                      <p className="mt-1.5 text-sm text-ink-muted leading-relaxed">{step.description}</p>
+                    </div>
                   </div>
                 </ScrollReveal>
               ))}
