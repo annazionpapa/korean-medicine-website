@@ -362,99 +362,43 @@ function ProcessSection() {
   );
 }
 
-/* ── Doctors Section ── */
+/* ── Doctor Message Section ── */
 function DoctorsSection() {
   return (
     <section className="py-20 lg:py-32 bg-forest/[0.03]">
-      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+      <div className="mx-auto max-w-4xl px-5 lg:px-8">
         <ScrollReveal>
-          <div className="text-center mb-14">
-            <span className="text-sm text-forest font-medium tracking-widest uppercase">
-              Our Doctors
-            </span>
-            <h2 className="mt-4 text-3xl lg:text-4xl font-serif font-semibold text-ink">
-              의료진 소개
-            </h2>
-            <p className="mt-4 text-ink-muted max-w-xl mx-auto">
-              풍부한 경험과 따뜻한 마음으로 진료합니다
-            </p>
+          <div className="relative rounded-3xl overflow-hidden">
+            {/* 원장 프로필 사진 */}
+            <div className="aspect-[3/4] sm:aspect-[4/3] lg:aspect-[16/9] relative">
+              <Image
+                src="/images/doctor-kim-full.jpg"
+                alt="김수현 대표원장"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 100vw, 900px"
+              />
+              {/* 그라데이션 오버레이 */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            </div>
+
+            {/* 인사말 오버레이 */}
+            <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
+              <p className="text-white/90 text-lg lg:text-xl font-serif leading-relaxed">
+                &ldquo;환자분의 이야기에 귀 기울이고,
+                <br className="hidden sm:block" />
+                몸이 스스로 낫는 힘을 되찾도록 돕겠습니다.
+                <br />
+                통증의 근본 원인을 찾아 치료하는 것이
+                <br className="hidden sm:block" />
+                수한의원의 철학입니다.&rdquo;
+              </p>
+              <p className="mt-4 text-white/60 text-sm font-medium">
+                대표원장 김수현
+              </p>
+            </div>
           </div>
         </ScrollReveal>
-
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {doctors.map((doctor, i) => (
-            <ScrollReveal key={doctor.id} delay={i + 1}>
-              <div className="bg-white rounded-2xl overflow-hidden border border-sand-dark hover:shadow-lg hover:shadow-forest/5 transition-all duration-300">
-                {/* Profile Image */}
-                <div className="aspect-[3/2] relative overflow-hidden">
-                  <Image
-                    src={doctor.image}
-                    alt={`${doctor.name} ${doctor.title} 프로필`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-
-                {/* Activity Images Strip */}
-                <div className="grid grid-cols-2 gap-px bg-sand-dark">
-                  {doctor.actionImages.map((img, j) => (
-                    <div
-                      key={j}
-                      className="aspect-[16/10] relative overflow-hidden"
-                    >
-                      <Image
-                        src={img.src}
-                        alt={img.alt}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Info */}
-                <div className="p-6 lg:p-7">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="px-2.5 py-1 bg-forest/10 text-forest text-xs font-medium rounded-full">
-                      {doctor.title}
-                    </span>
-                    <span className="text-xs text-ink-faint">{doctor.specialty}</span>
-                  </div>
-                  <h3 className="text-xl font-serif font-semibold text-ink">
-                    {doctor.name}
-                    <span className="text-sm font-display text-ink-faint ml-2">
-                      {doctor.nameEn}
-                    </span>
-                  </h3>
-                  <p className="mt-4 text-sm text-ink-muted leading-relaxed italic">
-                    &ldquo;{doctor.greeting}&rdquo;
-                  </p>
-
-                  <div className="mt-5 space-y-1.5">
-                    {doctor.career.slice(0, 3).map((item) => (
-                      <p key={item} className="text-xs text-ink-muted flex items-start gap-2">
-                        <span className="text-forest mt-0.5">·</span>
-                        {item}
-                      </p>
-                    ))}
-                  </div>
-
-                  <Link
-                    href="/doctors"
-                    className="mt-5 inline-flex items-center text-forest text-sm font-medium group"
-                  >
-                    자세히 보기
-                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
       </div>
     </section>
   );
