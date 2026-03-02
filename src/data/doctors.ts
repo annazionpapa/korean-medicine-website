@@ -21,8 +21,8 @@ export const doctors: Doctor[] = [
     specialty: "통증·추나 전문",
     image: "/images/doctor-kim-full.jpg",
     actionImages: [
-      { src: "/images/doctor-kim-action.jpg", alt: "추나요법 시술 중인 김수현 대표원장" },
       { src: "/images/doctor-kim-action2.jpg", alt: "침 시술 중인 김수현 대표원장" },
+      { src: "/images/doctor-kim-action.jpg", alt: "환자 상담 중인 김수현 대표원장" },
     ],
     education: [
       "경희대학교 한의과대학 졸업",
