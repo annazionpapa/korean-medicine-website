@@ -27,12 +27,12 @@ export default function Home() {
         <HeroSection />
         <NoticeBanner />
         <StatsBar />
+        <PhilosophySection />
         <ProgramsSection />
         <DoctorsSection />
         <ProcessSection />
         <ReviewsSection />
         <CTASection />
-        <PhilosophySection />
         <HealthInfoSection />
       </main>
       <Footer />
