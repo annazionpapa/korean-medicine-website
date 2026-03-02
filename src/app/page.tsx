@@ -133,28 +133,15 @@ function HeroSection() {
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden">
               <Image
                 src="/images/hero-interior.jpg"
-                alt="수한의원 내부 - 따뜻한 원목 인테리어의 편안한 진료 공간"
+                alt="김수현 원장 - 환자 맥진 상담 장면"
                 fill
                 className="object-cover"
                 priority
+                unoptimized
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
 
-            {/* Floating card */}
-            <div className="absolute -bottom-4 -left-4 lg:-left-8 bg-white rounded-2xl p-4 shadow-xl shadow-ink/5 border border-sand">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-forest/10 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-xs text-ink-muted">자동차보험</p>
-                  <p className="text-sm font-semibold text-ink">본인 부담 0원</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
