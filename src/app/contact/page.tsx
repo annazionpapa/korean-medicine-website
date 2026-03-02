@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomCTA from "@/components/MobileBottomCTA";
 import ScrollReveal from "@/components/ScrollReveal";
-import KakaoMap from "@/components/KakaoMap";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -265,12 +264,14 @@ export default function ContactPage() {
 
             <ScrollReveal>
               <div className="aspect-[16/9] lg:aspect-[21/9] rounded-2xl overflow-hidden border border-sand-dark">
-                <KakaoMap
-                  lat={37.4979}
-                  lng={127.0276}
-                  level={3}
-                  placeName="수한의원"
-                  address="서울특별시 강남구 테헤란로 123 수한빌딩 2층"
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.3!2d127.028!3d37.498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a0de0af15%3A0x63d2c6e462a9e7e8!2z6rCV64Ko64yA66GcIDM5Ng!5e0!3m2!1sko!2skr!4v1"
+                  className="w-full h-full"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="수한의원 오시는 길"
                 />
               </div>
             </ScrollReveal>
