@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomCTA from "@/components/MobileBottomCTA";
 import ScrollReveal from "@/components/ScrollReveal";
+import KakaoMap from "@/components/KakaoMap";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -263,20 +264,14 @@ export default function ContactPage() {
             </ScrollReveal>
 
             <ScrollReveal>
-              <div className="aspect-[16/9] lg:aspect-[21/9] rounded-2xl bg-sand overflow-hidden relative border border-sand-dark">
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                  <svg className="w-12 h-12 text-forest/30 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <p className="text-lg font-serif text-ink-light">지도 영역</p>
-                  <p className="text-sm text-ink-muted mt-2">
-                    실제 운영 시 네이버/카카오 지도가 삽입됩니다
-                  </p>
-                  <p className="text-sm text-ink-muted mt-1">
-                    서울특별시 강남구 테헤란로 123 수한빌딩 2층
-                  </p>
-                </div>
+              <div className="aspect-[16/9] lg:aspect-[21/9] rounded-2xl overflow-hidden border border-sand-dark">
+                <KakaoMap
+                  lat={37.4979}
+                  lng={127.0276}
+                  level={3}
+                  placeName="수한의원"
+                  address="서울특별시 강남구 테헤란로 123 수한빌딩 2층"
+                />
               </div>
             </ScrollReveal>
 
